@@ -3,3 +3,6 @@ pub use object_id::*;
 
 mod blob;
 pub use blob::*;
+
+mod commit;
+pub use commit::*;
