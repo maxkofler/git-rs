@@ -1,4 +1,4 @@
-use super::CommitError;
+use super::{CommitError, ObjectError};
 
 use super::{Error, Result};
 use std::{fmt::Display, io, string::FromUtf8Error};
@@ -19,6 +19,8 @@ pub enum ErrorType {
     Parse(ParsingError),
     /// An error while working with a commit
     Commit(CommitError),
+    /// An error while working with an object
+    Object(ObjectError),
 }
 
 impl Display for ErrorType {
@@ -29,6 +31,7 @@ impl Display for ErrorType {
             Self::FromUtf8(e) => e.fmt(f),
             Self::Parse(e) => e.fmt(f),
             Self::Commit(e) => e.fmt(f),
+            Self::Object(e) => e.fmt(f),
         }
     }
 }

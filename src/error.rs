@@ -24,6 +24,9 @@ pub use error_type::*;
 mod e_commit;
 pub use e_commit::*;
 
+mod e_object;
+pub use e_object::*;
+
 /// A error to be passed around the library
 #[derive(Debug)]
 pub struct Error {

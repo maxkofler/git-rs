@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+flate2 = "1.0.33"
 hex = "0.4.3"
 log = "0.4.22"
 ordermap = "0.5.3"
+sha1 = "0.10.6"
