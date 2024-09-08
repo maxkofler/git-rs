@@ -1,7 +1,10 @@
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
+    str::FromStr,
 };
+
+use hex::FromHexError;
 
 /// A wrapper around an object ID (sha1)
 #[derive(Clone, PartialEq, Eq, Hash)]
@@ -69,5 +72,13 @@ impl ObjectID {
 impl Display for ObjectID {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.to_hex_str())
+    }
+}
+
+impl FromStr for ObjectID {
+    type Err = FromHexError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Self::new_from_hex(s)
     }
 }
