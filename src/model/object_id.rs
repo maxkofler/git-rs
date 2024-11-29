@@ -14,9 +14,7 @@ pub struct ObjectID {
 
 impl Debug for ObjectID {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("ObjectID")
-            .field("hash", &self.to_string())
-            .finish()
+        write!(f, "{self}")
     }
 }
 
@@ -66,6 +64,12 @@ impl ObjectID {
         let rest = &string[2..];
 
         PathBuf::from(tld).join(rest)
+    }
+}
+
+impl From<Vec<u8>> for ObjectID {
+    fn from(value: Vec<u8>) -> Self {
+        Self { hash: value }
     }
 }
 
