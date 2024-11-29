@@ -1,3 +1,6 @@
+mod repository;
+pub use repository::*;
+
 mod object;
 pub use object::*;
 

@@ -1,4 +1,4 @@
-use super::{CommitError, ObjectError};
+use super::{CommitError, ObjectError, RepositoryError};
 
 use super::{Error, Result};
 use std::{fmt::Display, io, string::FromUtf8Error};
@@ -17,6 +17,8 @@ pub enum ErrorType {
     FromUtf8(FromUtf8Error),
     /// General parsing errors
     Parse(ParsingError),
+    /// An error while working with a repository
+    Repository(RepositoryError),
     /// An error while working with a commit
     Commit(CommitError),
     /// An error while working with an object
@@ -30,6 +32,7 @@ impl Display for ErrorType {
             Self::FromHex(e) => e.fmt(f),
             Self::FromUtf8(e) => e.fmt(f),
             Self::Parse(e) => e.fmt(f),
+            Self::Repository(e) => e.fmt(f),
             Self::Commit(e) => e.fmt(f),
             Self::Object(e) => e.fmt(f),
         }

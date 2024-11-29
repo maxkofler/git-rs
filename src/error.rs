@@ -27,6 +27,9 @@ pub use e_commit::*;
 mod e_object;
 pub use e_object::*;
 
+mod e_repository;
+pub use e_repository::*;
+
 /// A error to be passed around the library
 #[derive(Debug)]
 pub struct Error {
