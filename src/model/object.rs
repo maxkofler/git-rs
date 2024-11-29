@@ -4,7 +4,7 @@ use flate2::read::ZlibDecoder;
 
 use crate::{
     error::{Error, ErrorExt, ObjectError, ParsingError, Result},
-    util::split::SplitOnce,
+    util::split::SplitOnceOwned,
 };
 
 use super::{Blob, Commit, ObjectID};
