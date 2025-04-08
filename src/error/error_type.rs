@@ -1,6 +1,7 @@
 use super::{CommitError, ObjectError, RepositoryError};
 
 use super::{Error, Result};
+use std::str::Utf8Error;
 use std::{fmt::Display, io, string::FromUtf8Error};
 
 use super::ErrorIn;
@@ -15,6 +16,8 @@ pub enum ErrorType {
     FromHex(hex::FromHexError),
     /// An error when parsing UTF-8 strings
     FromUtf8(FromUtf8Error),
+    /// A error when working with UTF-8 strings
+    Utf8(Utf8Error),
     /// General parsing errors
     Parse(ParsingError),
     /// An error while working with a repository
@@ -31,6 +34,7 @@ impl Display for ErrorType {
             Self::IO(e) => e.fmt(f),
             Self::FromHex(e) => e.fmt(f),
             Self::FromUtf8(e) => e.fmt(f),
+            Self::Utf8(e) => e.fmt(f),
             Self::Parse(e) => e.fmt(f),
             Self::Repository(e) => e.fmt(f),
             Self::Commit(e) => e.fmt(f),
@@ -59,6 +63,13 @@ impl From<FromUtf8Error> for ErrorType {
     }
 }
 impl ErrorIn for FromUtf8Error {}
+
+impl From<Utf8Error> for ErrorType {
+    fn from(value: Utf8Error) -> Self {
+        Self::Utf8(value)
+    }
+}
+impl ErrorIn for Utf8Error {}
 
 /// A error that can happen while parsing something
 #[derive(Debug)]
